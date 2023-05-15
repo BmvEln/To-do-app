@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Note</title>
+</head>
+<body>
+
+<p th:text="${note.getTitle()}">VALUE</p>
+<p th:text="${note.getId()}">VALUE</p>
+<p th:text="${note.getDescription()}">VALUE</p>
+
+<a th:href="@{/notepad/{id}/edit(id=${note.getId()})}">EDIT</a>
+
+<!-- С помощью тега а нельзя отправлять delete запрос, только Гет, пэтому используем форму -->
+<form th:method="DELETE" th:action="@{/notepad/{id}(id=${note.getId()})}">
+    <input type="submit" value="DELETE"/>
+    <br/>
+    <hr/>
+    <a href="/notepad">BACK</a>
+</form>
+
+</body>
+</html>

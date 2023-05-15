@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New note</title>
+</head>
+<body>
+<!-- Первый атрибут это метод (с каким HTTP методом будет отправляться эта форма) -->
+<!-- Второй атрибут это action (на какой URL, адрес эта форма будет обращаться, куда она будет передавать свои данные -->
+<!-- (!) Все адреса пишутся в @{} -->
+<!-- В атрибут object передаем ему на вход объект класса Note (model.addAttribute("note", new Note());, положенная в модель -->
+<form th:method="POST" th:action="@{/notepad}" th:object="${note}">
+    <!-- Назначим поле title -->
+    <!-- th:field поле объекта класса Note, то есть указываем название того поля, который есть у объекта класса Note,
+     которому мы назначаем значение в этом поле HTML формы-->
+    <!-- id="title" - это лейбол -->
+    <label for="title">Enter title: </label>
+    <input type="text" th:field="*{title}" id="title"/>
+    <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error</div>
+    <br/>
+    <label for="description">Enter description: </label>
+    <input type="text" th:field="*{description}" id="description"/>
+    <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description error</div>
+    <!-- Кнопка при нажатии на которую данные с этой формы отправим в ПОСТ запросом на адрес /notepad  -->
+    <br/>
+    <input type="submit" value="CREATE"/>
+    <br/>
+    <hr/>
+    <a href="/notepad">BACK</a>
+</form>
+
+</body>
+</html>

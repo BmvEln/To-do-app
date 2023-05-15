@@ -1,0 +1,45 @@
+    <form th:method="PATCH" th:action="@{/notepad/{id}(id=${note.getId()})}" th:object="${note}">
+        <label for="title">Enter title: </label>
+        <input type="text" th:field="*{title}" id="title"/>
+        <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error</div>
+        <br/>
+        <label for="description">Enter description: </label>
+        <input type="text" th:field="*{description}" id="description"/>
+        <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description error</div>
+        <br/>
+        <input class="login-button" type="submit" value="Войти"/>
+        <br/>
+        <hr/>
+        <a href="/notepad">BACK</a>
+
+
+        <body>
+        <style>
+            input {
+                background-color: #10A37F;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+            }
+        </style>
+
+        <p th:text="${note.getTitle()}">VALUE</p>
+        <p th:text="${note.getId()}">VALUE</p>
+        <p th:text="${note.getDescription()}">VALUE</p>
+
+        <a th:href="@{/notepad/{id}/edit(id=${note.getId()})}">EDIT</a>
+
+        <!-- С помощью тега а нельзя отправлять delete запрос, только Гет, пэтому используем форму -->
+        <form th:method="DELETE" th:action="@{/notepad/{id}(id=${note.getId()})}">
+            <input type="submit" value="DELETE"/>
+            <br/>
+            <hr/>
+            <a href="/notepad">BACK</a>
+        </form>
+
+        </body>
+        </html>

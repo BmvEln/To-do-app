@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update note</title>
+</head>
+<body>
+<!-- method="PATCH" - HTML не поддерживает, но th:method="PATCH" - создаст скрытое поле -->
+<form th:method="PATCH" th:action="@{/notepad/{id}(id=${note.getId()})}" th:object="${note}">
+    <!-- th:object="${note}" - атрибут возьмет объект note, возьмет значение поля title, которое есть у этого объекта
+         и вставит его в поле th:field="*{title}". И при входе на страницу редактирования заметки, в форме будет не пусто, а будет
+          значение текущей заметки -->
+    <label for="title">Enter title: </label>
+    <input type="text" th:field="*{title}" id="title"/>
+    <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error</div>
+    <br/>
+    <label for="description">Enter description: </label>
+    <input type="text" th:field="*{description}" id="description"/>
+    <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description error</div>
+    <br/>
+    <input type="submit" value="UPDATE"/>
+    <br/>
+    <hr/>
+    <a href="/notepad">BACK</a>
+</form>
+</body>
+</html>
