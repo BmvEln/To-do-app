@@ -25,13 +25,6 @@ public class NotepadController {
         this.noteDAO = noteDAO;
     }
 
-    @GetMapping("/note")
-    public String test(Model model) {
-        model.addAttribute("notepad", noteDAO.index());
-        return "notepad/note";
-    }
-
-
     // Получим все заметки по id из DAO и передадим наотображение в представление
     @GetMapping()
     public String index(Model model) {
